@@ -1,0 +1,32 @@
+    <div id="loading-modal" class="loading-modal">
+        <div class="loading-content">
+            <img src="images/kwm-logo-nobg.png" alt="Logo Kwami" width="50" height="50">
+            <p>Chargement<span class="dots"></span></p>
+        </div>
+    </div>
+
+
+-----------
+
+
+    <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Rechercher...">
+        </div>
+
+
+---------------
+
+
+        // Search movies and TV from TMDB
+async function searchTMDB(query) {
+    const movieResponse = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKeyTMDB}&language=fr-FR&query=${encodeURIComponent(query)}`);
+    const stvResponse = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${apiKeyTMDB}&language=fr-FR&query=${encodeURIComponent(query)}`);
+
+    const movies = await movieResponse.json();
+    const stv = await stvResponse.json(); // Corrected here
+
+    return { movies: movies.results, stv: stv.results }; // Corrected here
+}
+
+----------
+
